@@ -1,0 +1,8 @@
+epochs = 5
+batch_size = 2048
+learning_rate = 0.001
+weight_decay = 0.0001
+hidden_1 = 64
+hidden_2 = 32
+dropout = 0.2
+max_grad_norm = 5.0

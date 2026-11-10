@@ -1,0 +1,41 @@
+[build-system]
+requires = ["setuptools>=77"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "fraud-detection"
+version = "0.1.0"
+description = "Federated personalized fraud detection research prototype"
+requires-python = ">=3.13,<3.14"
+dependencies = ["torch", "flwr", "shap", "streamlit", "pandas", "numpy", "scikit-learn", "plotly", "pydantic"]
+
+[project.optional-dependencies]
+dev = ["pytest"]
+
+[project.scripts]
+fraud-detection = "fraud_detection.cli:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "--basetemp=.pytest_tmp"
+
+[tool.flwr.app]
+publisher = "minor-project-local"
+fab-include = ["src/fraud_detection/**/*.py"]
+
+[tool.flwr.app.components]
+serverapp = "fraud_detection.federated.server_app:app"
+clientapp = "fraud_detection.federated.client_app:app"
+
+[tool.flwr.app.config]
+num-server-rounds = 5
+local-epochs = 1
+batch-size = 2048
+learning-rate = 0.001
+weight-decay = 0.0001
+max-grad-norm = 5.0
+setting = "mild"
+seed = 42

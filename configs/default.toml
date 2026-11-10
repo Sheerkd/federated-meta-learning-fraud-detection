@@ -1,0 +1,9 @@
+seed = 42
+device = "cpu"
+log_level = "INFO"
+client_ids = ["bank_a", "bank_b", "bank_c", "bank_d"]
+
+[paths]
+data = "data"
+clients = "clients"
+runs = "runs"
